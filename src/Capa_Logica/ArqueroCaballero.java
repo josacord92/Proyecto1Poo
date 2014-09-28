@@ -10,19 +10,19 @@ package Capa_Logica;
  *
  * @author Jose
  */
-public class ArqueroBarbaro extends GuerreroDeMedianoAlcance {
+public class ArqueroCaballero extends GuerreroDeMedianoAlcance {
     
-    public static double costo = 120;
-    public static int nivelAparicion = 1;
-    public static int campoEnElEjercito = 1;
+    public static double costo = 1000;
+    public static int nivelAparicion = 10;
+    public static int campoEnElEjercito = 8;
     
-    ArqueroBarbaro(){
+    ArqueroCaballero(){
     setID(this.getIDCounter());        // Se le asigna un identificador primary KEY al espadachin como identificador unico
     this.incrementarIDCounter();       // Incremento del primary key para la creacion de otros elementos en el juego    
-    setNombre("Arquero Barbaro -ID: "+getID());   //Nombre del Personaje
+    setNombre("Arquero Caballero -ID: "+getID());   //Nombre del Personaje
     setNivel(1);                       //Nivel de fuerza Con El Que Se Crea El Guerrero - Inicia en nivel 1
-    setCantidadGolpesPorUnidadTiempo(15);
-    setVida(45);
+    setCantidadGolpesPorUnidadTiempo(120);
+    setVida(150);
     }
     
     public void run()
