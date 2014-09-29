@@ -5,7 +5,7 @@
  */
 
 package Capa_Logica;
-
+import java.io.Serializable;
 /**
  *
  * @author Jose
@@ -15,7 +15,7 @@ package Capa_Logica;
  * esto no incluye edificios que esten estaticos 
  * o sin algun ataque
  */
-public abstract class ElementoJugable extends Thread{
+public abstract class ElementoJugable extends Thread implements Serializable{
     private double ID;
     private String nombre; 
     private double vida;
