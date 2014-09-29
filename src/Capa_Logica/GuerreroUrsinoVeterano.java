@@ -10,19 +10,19 @@ package Capa_Logica;
  *
  * @author Jose
  */
-public class DragonBarbaro extends GuerreroAereo {
+public class GuerreroUrsinoVeterano extends GranBestia {
     
-    public static double costo = 20;
-    public static int nivelAparicion = 1;
-    public static int campoEnElEjercito = 1;
+    public static double costo = 10;
+    public static int nivelAparicion = 5;
+    public static int campoEnElEjercito = 2;
     
-    DragonBarbaro(){
+    GuerreroUrsinoVeterano(){
     setID(this.getIDCounter());        // Se le asigna un identificador primary KEY al espadachin como identificador unico
     this.incrementarIDCounter();       // Incremento del primary key para la creacion de otros elementos en el juego    
-    setNombre("Dragon Barbaro -ID: "+getID());   //Nombre del Personaje
+    setNombre("Guerrero Ursino Veterano -ID: "+getID());   //Nombre del Personaje
     setNivel(1);                       //Nivel de fuerza Con El Que Se Crea El Guerrero - Inicia en nivel 1
-    setCantidadGolpesPorUnidadTiempo(30);
-    setVida(40);
+    setCantidadGolpesPorUnidadTiempo(20);
+    setVida(100);
     }
     
     public void run()
