@@ -6,10 +6,15 @@
 
 package Capa_Logica;
 import java.io.Serializable;
+import java.util.ArrayList;
 /**
  *
  * @author Jose
  */
-public class MemoriaDePrograma implements Serializable{
+public  class  MemoriaDePrograma implements Serializable{
+    public ArrayList<Jugador> jugadores;
     
+    public MemoriaDePrograma(){
+    jugadores = new ArrayList<Jugador>();
+    }
 }

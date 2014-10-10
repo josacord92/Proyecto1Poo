@@ -5,11 +5,38 @@
  */
 
 package Capa_Logica;
+import java.io.Serializable;
 
 /**
  *
  * @author Jose
  */
-public class Credencial {
+public class Credencial implements Serializable {
+    private String nombreUsuario;
+    private String passwordUsuario;
+    
+    public Credencial(){
+    }
+    
+    public Credencial(String nombreUsuario, String passwordUsuario){ 
+    this.nombreUsuario = nombreUsuario;
+    this.passwordUsuario = passwordUsuario;
+    }
+    
+    public void setNombreUsuario(String nombreUsuario){
+    this.nombreUsuario = nombreUsuario;
+    }
+    
+    public void setPasswordUsuario(String passwordUsuario){
+    this.passwordUsuario = passwordUsuario;
+    }
+    
+    public String getNombreUsuario(){
+    return this.nombreUsuario;
+    }
+    
+    public String getPasswordUsuario(){
+    return this.passwordUsuario;
+    }
     
 }
