@@ -12,13 +12,12 @@ import java.io.Serializable;
  *
  * @author Jose
  */
-public  class GuerreroDeContacto extends Guerrero implements Serializable {
-    
+public class Heroe extends Guerrero implements Serializable {
     public static double costo;
     public static int nivelAparicion;
     public static int campoEnElEjercito;
     
-    public GuerreroDeContacto(){
+    Heroe(){
     setID(this.getIDCounter());        // Se le asigna un identificador primary KEY al espadachin como identificador unico
     this.incrementarIDCounter();       // Incremento del primary key para la creacion de otros elementos en el juego    
     setNombre("Espadachin Mandoble -ID: "+getID());   //Nombre del Personaje
@@ -27,7 +26,7 @@ public  class GuerreroDeContacto extends Guerrero implements Serializable {
     setVida(50);
     }
     
-    public GuerreroDeContacto(String nombre, int nivelDePoder, int nivelDeAparicion,double costo, int campoEnElEjercito, double cantidadDeGolpesPorUnidadDeTiempo,double vida){
+    public Heroe(String nombre, int nivelDePoder, int nivelDeAparicion,double costo, int campoEnElEjercito, double cantidadDeGolpesPorUnidadDeTiempo,double vida){
     
     }
     
@@ -65,13 +64,6 @@ public  class GuerreroDeContacto extends Guerrero implements Serializable {
         
     */
     }
-    
-    @Override
-    public void atacar(){
-    
-    }
-    
-    public void mover(){
-    
-    }
+    public  void atacar(){};
+    public void mover(){};
 }

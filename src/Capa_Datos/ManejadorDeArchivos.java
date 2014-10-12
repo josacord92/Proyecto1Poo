@@ -6,12 +6,22 @@
 
 package Capa_Datos;
 
+import Capa_Grafica.MainPrograma;
+import Capa_Logica.*;
+import static Capa_Grafica.MainPrograma.memoriaDePrograma;
+import Capa_Logica.MemoriaDePrograma;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,9 +29,137 @@ import java.io.ObjectOutputStream;
  */
 public class ManejadorDeArchivos {
     
-     private static String path = "programfiles/MemoriaPrograma.txt";
+     private static String pathArchivoMemoriaPrograma = "programfiles/MemoriaPrograma.txt";
+     private static String pathCarpetaCreaturasPrograma = "programfiles/creaturas";
+     
+     
+     public static void inicializarMemoriaPrograma(){
+     try {
+            Object memoria = ManejadorDeArchivos.leerObjeto(pathArchivoMemoriaPrograma);
+            if(memoria == null){
+            memoriaDePrograma = new MemoriaDePrograma(); 
+            System.out.println("Se parte con el programa en blanco");
+            }
+            else{
+            memoriaDePrograma = (MemoriaDePrograma) memoria;
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainPrograma.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+     
+     public static void inicializarCreaturasPrograma(){
+       File dir = new File(pathCarpetaCreaturasPrograma);
+        if(!dir.exists()){
+        System.out.println("El directorio No Existe");
+        }
+        
+        else{
+        String[] ficheros = dir.list();
+        String[] datos;
+        if (ficheros == null){
+            System.out.println("No hay ficheros en el directorio especificado");
+        }
+        else { 
+              int tipoDeGuerrero;
+              String nombre;
+              int nivelDePoder;
+              int nivelDeAparicion;
+              double costo;
+              int campoEnElEjercito;
+              double cantidadDeGolpesPorUnidadDeTiempo;
+              double vida;
+              
+               for (int x=0;x<ficheros.length;x++){
+                    datos = obtenerContenidoArchivoGRO(ficheros[x]);
+                    if(datos != null){
+                    tipoDeGuerrero = Integer.parseInt(datos[0]);
+                    nombre = datos[1];
+                    nivelDePoder =Integer.parseInt(datos[2]);
+                    nivelDeAparicion = Integer.parseInt(datos[3]);
+                    costo = Double.parseDouble(datos[4]);
+                    campoEnElEjercito = Integer.parseInt(datos[5]);
+                    cantidadDeGolpesPorUnidadDeTiempo = Double.parseDouble(datos[6]);
+                    vida = Double.parseDouble(datos[7]); 
+                  switch(tipoDeGuerrero){
+                    case 0: //Guerrero de contacto
+                    {
+                    
+                        GuerreroDeContacto guerreroDeContacto = new GuerreroDeContacto(nombre,nivelDePoder,nivelDeAparicion,costo,campoEnElEjercito,cantidadDeGolpesPorUnidadDeTiempo,vida);
+                        MainPrograma.personajesJugables.add(guerreroDeContacto);
+                        break;                                                      
+                    }
+                    case 1: //Guerrero de mediano alcance
+                    {
+                         GuerreroDeMedianoAlcance guerreroDeMedianoAlcance = new GuerreroDeMedianoAlcance(nombre,nivelDePoder,nivelDeAparicion,costo,campoEnElEjercito,cantidadDeGolpesPorUnidadDeTiempo,vida);
+                        MainPrograma.personajesJugables.add(guerreroDeMedianoAlcance);
+                         break;
+                    }
+                    case 2: //Guerrero Aereo
+                    {
+                         GuerreroAereo guerreroAereo = new GuerreroAereo(nombre,nivelDePoder,nivelDeAparicion,costo,campoEnElEjercito,cantidadDeGolpesPorUnidadDeTiempo,vida);
+                         MainPrograma.personajesJugables.add(guerreroAereo);
+                         break;
+                    }
+                    case 3: //GranBestia
+                    {
+                    
+                         GranBestia granBestia = new GranBestia(nombre,nivelDePoder,nivelDeAparicion,costo,campoEnElEjercito,cantidadDeGolpesPorUnidadDeTiempo,vida);
+                        MainPrograma.personajesJugables.add(granBestia);
+                         break;
+                    }
+                    case 4: //Heroe
+                    {
+                         Heroe heroe = new Heroe(nombre,nivelDePoder,nivelDeAparicion,costo,campoEnElEjercito,cantidadDeGolpesPorUnidadDeTiempo,vida);
+                         MainPrograma.personajesJugables.add(heroe);
+                         break;
+                    }
+            }
+                   
+                                     }
+                                                  }
+             }
+        
+        }
+     }
+     
+     private static String[] obtenerContenidoArchivoGRO(String pathArchivo){
+                 try{
+        String linea = "";
+        String resultado = ""; 
+        FileReader archivo;
+        archivo = new FileReader(pathArchivo);
+        BufferedReader lector = new BufferedReader(archivo);
+        while ((linea = lector.readLine()) != null) {            
+             //resultado += linea+"\n"; 
+            
+	StringTokenizer tokens=new StringTokenizer(linea, "/");
+        int nDatos=tokens.countTokens();
+        String[] datos=new String[nDatos];
+        int i=0;
+        while(tokens.hasMoreTokens()){
+            String str=tokens.nextToken();
+            datos[i]=str;
+            i++;
+        }
+        return datos;
+       // agenda.agregarContactos(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], Integer.parseInt(datos[6]));
+            }
+               }
+ 
+    catch (FileNotFoundException ex) {
+           return null;
+        } catch (IOException ex) {
+            return null;
+        }
+            return null;
+     }
      
      public static void inicializarArchivos(){
+         inicializarMemoriaPrograma();
+         inicializarCreaturasPrograma();
+     /*
      File archivo=new File(path);
     
      if (archivo.exists()){
@@ -38,6 +176,7 @@ public class ManejadorDeArchivos {
             ioe.printStackTrace();
            }
      }
+             */
     }
      
      
@@ -66,4 +205,15 @@ public class ManejadorDeArchivos {
         } catch (IOException ex) { return null; }
     }
      
+    //miscelaneas para averiguar si un string es numero
+    public static boolean esNumero(String string){
+    
+        try{
+            Integer.parseInt(string);
+        }catch (Exception e){
+        return false;
+        }
+    
+        return true;
+    }
 }

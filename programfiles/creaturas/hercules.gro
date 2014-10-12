@@ -1,0 +1,18 @@
+0/herculoide/1/2/300/5/10/500
+
+tipo/nombre/nivelDePoder/nivelAparicion/costo/campoEnElEjercito/cantidadgolpesPorUnidadTiempo/vida
+
+GuerreroDeContacto 0
+GuerreroDeMedianoAlcance 1
+GuerreroAereo 2
+GranBestia 3
+Heroe 4
+
+costo * int
+nivelAparicion * int
+campoEnElEjercito* int
+nombre * string
+nivel  * int
+cantidadgolpesPorUnidadTiempo* double
+Cantidad vida* double
+tipo* int

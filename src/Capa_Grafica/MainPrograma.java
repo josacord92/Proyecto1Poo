@@ -11,14 +11,17 @@ import Capa_Logica.MemoriaDePrograma;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.io.*;
 /**
  *
  * @author Jose
  */
 public class MainPrograma {
-    public static MemoriaDePrograma memoriaDePrograma; 
+    public static MemoriaDePrograma memoriaDePrograma; //estatico para tener acceso global para logeo u otras acciones 
+    public static ArrayList<Guerrero> personajesJugables = new ArrayList<Guerrero>(); //Personajes jugables disponibles para el menu y clonacion
     public static void main(String args[]){
-        try {
+        
+        //try {
           
             //MemoriaDePrograma memoriaDePrograma = new MemoriaDePrograma();
             //try {
@@ -50,7 +53,7 @@ public class MainPrograma {
             Logger.getLogger(MainPrograma.class.getName()).log(Level.SEVERE, null, ex);
             }
          */
-            
+            /*
             Object memoria = ManejadorDeArchivos.leerObjeto("programfiles/MemoriaPrograma.txt");
             //MemoriaDePrograma memoria2 = (MemoriaDePrograma) memoria;
             if(memoria == null){
@@ -65,6 +68,23 @@ public class MainPrograma {
             Logger.getLogger(MainPrograma.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        */
+        ManejadorDeArchivos.inicializarArchivos();//Se carga todo el contenido necesario desde los archivos
+        /*
+        File dir = new File("programfiles/creaturas");
+        if(!dir.exists()){
+        System.out.println("Directorio TRUFA");
+        }
+        else{
+        String[] ficheros = dir.list();
+        if (ficheros == null)
+            System.out.println("No hay ficheros en el directorio especificado");
+        else { 
+               for (int x=0;x<ficheros.length;x++)
+                System.out.println(ficheros[x]);
+             }
+        
+        }*/
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

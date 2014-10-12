@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * @author Jose
  */
-public abstract class GranBestia extends Guerrero implements Serializable{
+public  class GranBestia extends Guerrero implements Serializable{
     
      public static double costo;
     public static int nivelAparicion;
@@ -25,6 +25,10 @@ public abstract class GranBestia extends Guerrero implements Serializable{
     setNivel(1);                       //Nivel de fuerza Con El Que Se Crea El Guerrero - Inicia en nivel 1
     setCantidadGolpesPorUnidadTiempo(20);
     setVida(50);
+    }
+    
+    public GranBestia(String nombre, int nivelDePoder, int nivelDeAparicion,double costo, int campoEnElEjercito, double cantidadDeGolpesPorUnidadDeTiempo,double vida){
+    
     }
     
     public void run()
