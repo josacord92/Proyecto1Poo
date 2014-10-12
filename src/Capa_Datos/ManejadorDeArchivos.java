@@ -9,6 +9,7 @@ package Capa_Datos;
 import Capa_Grafica.MainPrograma;
 import Capa_Logica.*;
 import static Capa_Grafica.MainPrograma.memoriaDePrograma;
+import static Capa_Grafica.MainPrograma.personajesJugables;
 import Capa_Logica.MemoriaDePrograma;
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,7 +32,7 @@ public class ManejadorDeArchivos {
     
      private static String pathArchivoMemoriaPrograma = "programfiles/MemoriaPrograma.txt";
      private static String pathCarpetaCreaturasPrograma = "programfiles/creaturas";
-     
+     private static String pathArchivoADMAdministrador ="programfiles/ArchivoAdministrador.adm";
      
      public static void inicializarMemoriaPrograma(){
      try {
@@ -48,6 +49,13 @@ public class ManejadorDeArchivos {
             Logger.getLogger(MainPrograma.class.getName()).log(Level.SEVERE, null, ex);
         }
      }
+     
+     public static void inicializarCredencialesAdministrador(){
+     String[] datos;
+     datos = obtenerContenidoArchivoADM(pathArchivoADMAdministrador);
+     
+     }
+     
      
      public static void inicializarCreaturasPrograma(){
        File dir = new File(pathCarpetaCreaturasPrograma);
@@ -87,32 +95,32 @@ public class ManejadorDeArchivos {
                     {
                     
                         GuerreroDeContacto guerreroDeContacto = new GuerreroDeContacto(nombre,nivelDePoder,nivelDeAparicion,costo,campoEnElEjercito,cantidadDeGolpesPorUnidadDeTiempo,vida);
-                        MainPrograma.personajesJugables.add(guerreroDeContacto);
+                        personajesJugables.add(guerreroDeContacto);
                         break;                                                      
                     }
                     case 1: //Guerrero de mediano alcance
                     {
                          GuerreroDeMedianoAlcance guerreroDeMedianoAlcance = new GuerreroDeMedianoAlcance(nombre,nivelDePoder,nivelDeAparicion,costo,campoEnElEjercito,cantidadDeGolpesPorUnidadDeTiempo,vida);
-                        MainPrograma.personajesJugables.add(guerreroDeMedianoAlcance);
+                        personajesJugables.add(guerreroDeMedianoAlcance);
                          break;
                     }
                     case 2: //Guerrero Aereo
                     {
                          GuerreroAereo guerreroAereo = new GuerreroAereo(nombre,nivelDePoder,nivelDeAparicion,costo,campoEnElEjercito,cantidadDeGolpesPorUnidadDeTiempo,vida);
-                         MainPrograma.personajesJugables.add(guerreroAereo);
+                         personajesJugables.add(guerreroAereo);
                          break;
                     }
                     case 3: //GranBestia
                     {
                     
                          GranBestia granBestia = new GranBestia(nombre,nivelDePoder,nivelDeAparicion,costo,campoEnElEjercito,cantidadDeGolpesPorUnidadDeTiempo,vida);
-                        MainPrograma.personajesJugables.add(granBestia);
+                        personajesJugables.add(granBestia);
                          break;
                     }
                     case 4: //Heroe
                     {
                          Heroe heroe = new Heroe(nombre,nivelDePoder,nivelDeAparicion,costo,campoEnElEjercito,cantidadDeGolpesPorUnidadDeTiempo,vida);
-                         MainPrograma.personajesJugables.add(heroe);
+                         personajesJugables.add(heroe);
                          break;
                     }
             }
@@ -124,6 +132,37 @@ public class ManejadorDeArchivos {
         }
      }
      
+     //Archivo ADM es el cual contendra la contraseña y password del 
+     private static String[] obtenerContenidoArchivoADM(String pathArchivoADM){
+     
+                          try{
+        String linea = "";
+        String resultado = ""; 
+        FileReader archivo;
+        archivo = new FileReader(pathArchivoADM);
+        BufferedReader lector = new BufferedReader(archivo);
+        
+        while ((linea = lector.readLine()) != null) {            
+	StringTokenizer tokens=new StringTokenizer(linea, "/");
+        int nDatos=tokens.countTokens();
+        String[] datos=new String[nDatos];
+        int i=0;
+        while(tokens.hasMoreTokens()){
+            String str=tokens.nextToken();
+            datos[i]=str;
+            i++;
+        }
+        return datos;
+            }
+               }
+ 
+    catch (FileNotFoundException ex) {
+           return null;
+        } catch (IOException ex) {
+            return null;
+        }
+            return null;
+     }
      private static String[] obtenerContenidoArchivoGRO(String pathArchivo){
                  try{
         String linea = "";
@@ -159,6 +198,7 @@ public class ManejadorDeArchivos {
      public static void inicializarArchivos(){
          inicializarMemoriaPrograma();
          inicializarCreaturasPrograma();
+         inicializarCredencialesAdministrador();
      /*
      File archivo=new File(path);
     
